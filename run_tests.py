@@ -12,6 +12,8 @@ from tests.tests_postnikov.add_products import AddProductTest
 from tests.tests_postnikov.manage_orders import ManageOrdersTest
 from tests.tests_postnikov.rest_tags import ManageRestaurantTagsTest
 
+from tests.tests_potapchuk.chat import ChatTest
+
 if __name__ == '__main__':
     suite = unittest.TestSuite((
         # unittest.makeSuite(AuthenticationTest),
@@ -25,6 +27,8 @@ if __name__ == '__main__':
         # unittest.makeSuite(AddProductTest), #work
         # unittest.makeSuite(ManageRestaurantTagsTest),
         # unittest.makeSuite(ManageOrdersTest),
+
+        unittest.makeSuite(ChatTest),
     ))
 
     result = unittest.TextTestRunner(verbosity=2).run(suite)
