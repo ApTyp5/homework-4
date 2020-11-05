@@ -1,6 +1,7 @@
 import os
 import unittest
 
+from tests.helpers.database import DatabaseFiller
 from tests.pages.chat_list_page import ChatListPage
 from tests.pages.chat_page import ChatPage
 from selenium.webdriver import DesiredCapabilities, Remote
@@ -16,7 +17,7 @@ class ChatListTest(unittest.TestCase):
             desired_capabilities=getattr(DesiredCapabilities, browser).copy()
         )
 
-        self.sent_message = self.createChatWithUserMessage()
+        self.user_id, self.sent_message = self.createChatWithUserMessage()
 
         self.LOGIN = os.environ.get('SUP_LOGIN')
         self.PASSWORD = os.environ.get('SUP_PASSWORD')
@@ -30,11 +31,9 @@ class ChatListTest(unittest.TestCase):
         self.driver.quit()
 
     def testRecvUserMessage(self):
-        self.chat_list_page.click_first_chat_card()
+        self.chat_list_page.click_user_chat_card(self.user_id)
         chat_page = ChatPage(self.driver)
-        print('clicked')
         chat_page.wait_messages_visible()
-        print('wait visible')
         self.assertEqual(chat_page.last_message, self.sent_message)
 
     def createChatWithUserMessage(self):
@@ -46,4 +45,8 @@ class ChatListTest(unittest.TestCase):
         chat.wait_input_visible()
         chat.send_start_message()
         self.sent_message = chat.START_MESSAGE
-        return chat.START_MESSAGE
+
+        filler = DatabaseFiller()
+        filler.user_auth()
+        user_id = filler.get_profile_id()
+        return user_id, chat.START_MESSAGE
