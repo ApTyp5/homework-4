@@ -1,3 +1,5 @@
+from tests.helpers.database import DatabaseFiller
+from tests.pages.address_page import AddressPage
 from tests.pages.auth_page import AuthPage
 from tests.pages.profile_page import ProfilePage
 
@@ -15,3 +17,9 @@ def re_authenticate(test_suite):
     prof_page.wait_open()
     prof_page.profile_form.logout()
     authenticate(test_suite)
+
+
+def set_addr(test_sute):
+    addr_page = AddressPage(test_sute.driver)
+    addr_page.open()
+    addr_page.start_address(DatabaseFiller.ADDRESS)
