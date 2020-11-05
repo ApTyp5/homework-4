@@ -5,4 +5,4 @@ export ADMIN_LOGIN="89999999998"
 export ADMIN_PASSWORD="password"
 export SUP_LOGIN="89999999999"
 export SUP_PASSWORD="password"
-python3 run_tests.py
+python3.8 run_tests.py

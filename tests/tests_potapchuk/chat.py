@@ -1,9 +1,8 @@
 import os
 import unittest
-
-from tests.pages.auth_page import AuthPage
 from tests.pages.chat_page import ChatPage
 from selenium.webdriver import DesiredCapabilities, Remote
+from tests.tests_potapchuk.utils import authenticate
 
 
 class ChatTest(unittest.TestCase):
@@ -18,11 +17,11 @@ class ChatTest(unittest.TestCase):
             desired_capabilities=getattr(DesiredCapabilities, browser).copy()
         )
 
-        self.authenticate()
+        authenticate(self)
 
         self.page = ChatPage(self.driver)
         self.page.open()
-        self.page.wait_visible()
+        self.page.wait_input_visible()
         # guarantee the positive number of messages
         self.page.send_start_message()
 
@@ -44,9 +43,3 @@ class ChatTest(unittest.TestCase):
 
     def tearDown(self):
         self.driver.quit()
-
-    def authenticate(self):
-        auth_page = AuthPage(self.driver)
-        auth_page.open()
-        auth_page.wait_open()
-        auth_page.auth(self.LOGIN, self.PASSWORD)

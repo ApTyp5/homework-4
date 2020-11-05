@@ -10,10 +10,15 @@ class ChatPage(Page):
     SEND_BUT = '//button[@class="neon-button send_button"]'
     START_MESSAGE = __name__
 
-    def wait_visible(self):
+    def wait_input_visible(self):
         return WebDriverWait(self.driver, 5, 0.1).until(
             lambda d: d.find_element_by_xpath(self.MESSAGE_INPUT).is_displayed() and
                       d.find_element_by_xpath(self.SEND_BUT).is_displayed()
+        )
+
+    def wait_messages_visible(self):
+        return WebDriverWait(self.driver, 5, 0.1).until(
+            lambda d: d.find_element_by_xpath(self.MESSAGE_TEXT).is_displayed()
         )
 
     def send_message(self, message):
