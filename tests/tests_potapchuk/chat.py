@@ -37,7 +37,7 @@ class ChatTest(unittest.TestCase):
 
     def test_long_message(self):
         message = self.test_long_message.__name__
-        long_message = 5 * message
+        long_message = 10 * message
 
         self.page.send_message(long_message)
         self.assertEqual(self.page.last_message, long_message)
