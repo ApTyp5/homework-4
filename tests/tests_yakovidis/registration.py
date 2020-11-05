@@ -1,5 +1,4 @@
 import os
-import time
 import unittest
 from tests.pages.profile_page import ProfilePage
 from tests.pages.auth_page import AuthPage
@@ -73,7 +72,7 @@ class RegistrationTest(unittest.TestCase):
 
         self.registration_form.set_name('asdasdasd')
         self.registration_form.set_surname('asdasdasd')
-        self.registration_form.set_phone('89999999991')
+        self.registration_form.set_phone('89999999988')
         self.registration_form.set_password1('1234567')
         self.registration_form.set_password2('1234567')
 
